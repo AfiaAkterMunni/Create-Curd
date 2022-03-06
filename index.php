@@ -1,6 +1,68 @@
-<?php include"part/header.php"?>
+<?php
 
-    <h1>Index Page</h1>
-    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit dolor repellendus quasi porro adipisci perferendis eaque esse quam distinctio aspernatur rerum exercitationem laudantium magni recusandae cumque doloribus quaerat saepe harum vel autem sunt eius, et est voluptatem! Facilis eveniet et quos ipsam mollitia id illo unde expedita consectetur voluptates maiores aperiam fugiat voluptatibus, natus iste consequuntur accusamus porro? Illum veritatis exercitationem minus soluta quibusdam voluptatem quisquam facere distinctio odit unde laboriosam facilis cum excepturi molestiae nulla ipsam rem, veniam error, commodi sapiente laborum inventore quia rerum voluptas? Sunt, adipisci non quam omnis quidem corrupti, consequuntur placeat cumque, cum culpa debitis.</p>
+$pdo = new PDO('mysql:host=localhost;port=3306;dbname=products_curd', 'root', '');
+$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-<?php include"part/footer.php"?>
+$statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
+$statement->execute();
+$products = $statement->fetchAll(PDO::FETCH_ASSOC);
+// echo '<pre>';
+// var_dump($products);
+// echo '</pre>';
+
+
+?>
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="app.css">
+    <title>Products CURD</title>
+  </head>
+  <body>
+    <h1>Products CURD</h1>
+    <p>
+      <a href="create.php" class="btn btn-success">Create Product</a>
+    </p>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Image</th>
+      <th scope="col">Title</th>
+      <th scope="col">Price</th>
+      <th scope="col">Create Date</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach($products as $i => $product): ?>
+      <tr>
+        <th scope="row"><?php echo $i + 1?></th>
+        <td></td>
+        <td><?php echo $product['title']?></td>
+        <td><?php echo $product['price']?></td>
+        <td><?php echo $product['create_date']?></td>
+        <td>
+          <button type="button" class="btn btn-sm btn-outline-success">Success</button>
+          <button type="button" class="btn btn-sm btn-outline-danger">Danger</button>
+        </td>
+        
+      </tr>
+    <?php endforeach; ?>
+  </tbody>
+</table>
+  </body>
+</html>
