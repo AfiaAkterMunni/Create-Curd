@@ -1,6 +1,6 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost;port=3306;dbname=products_CRUD', 'root', '');
+$pdo = new PDO('mysql:host=localhost;port=3306;dbname=products_curd', 'root', '');
 $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 $statement = $pdo->prepare('SELECT * FROM products ORDER BY create_date DESC');
@@ -47,7 +47,9 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
       <?php foreach ($products as $i => $product) : ?>
         <tr>
           <th scope="row"><?php echo $i + 1 ?></th>
-          <td></td>
+          <td>
+            <img src="<?php echo $product['image']?>" alt="" class="image">
+          </td>
           <td><?php echo $product['title'] ?></td>
           <td><?php echo $product['price'] ?></td>
           <td><?php echo $product['create_date'] ?></td>
