@@ -1,7 +1,7 @@
 <?php
 
-$pdo = new PDO('mysql:host=localhost;port=3306;dbname=products_curd', 'root', '');
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+/** @var $pdo \PDO */
+require_once "database.php";
 
 
 $search = $_GET['search'] ?? '';
@@ -24,21 +24,8 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 ?>
 
-<!doctype html>
-<html lang="en">
+<?php include_once 'views/partials/header.php'?>
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/app.css">
-  <title>Products CRUD</title>
-</head>
-
-<body>
   <h1>Products CRUD (Create, Read, Update, Delete)</h1>
   <p>
     <a href="create.php" class="btn btn-success">Create Product</a>
@@ -83,6 +70,5 @@ $products = $statement->fetchAll(PDO::FETCH_ASSOC);
       <?php endforeach; ?>
     </tbody>
   </table>
-</body>
-
-</html>
+  
+<?php include_once 'views/partials/footer.php'?>
