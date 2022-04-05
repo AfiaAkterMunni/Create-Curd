@@ -10,9 +10,27 @@ if(!$id){
     exit;
 }
 
+
     // echo '<pre>';
     // var_dump($id);
     // echo '</pre>';
+
+$statement = $pdo->prepare('SELECT image FROM products WHERE id = :id');
+$statement->bindValue(':id', $id);
+$statement->execute();
+$product = $statement->fetch(PDO::FETCH_ASSOC);
+
+    // echo '<pre>';
+    // var_dump($product);
+    // echo '</pre>';
+    // exit;
+
+
+if($product['image'])
+{
+    unlink($product['image']);
+}
+
 $statement = $pdo->prepare('DELETE FROM products WHERE id = :id');
 $statement->bindValue(':id', $id);
 $statement->execute();
