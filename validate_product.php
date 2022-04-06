@@ -28,7 +28,16 @@
 
             if($product['image'])
             {
+                /** ================ New Code for you to see ======================*/  
+                // $productImagePathArray = explode('/', $product['image']);
+                // array_pop($productImagePathArray);
+                // $productImageDirectoryPath = implode('/', $productImagePathArray);
+                /** ========================= End here ============================*/  
                 unlink($product['image']);
+                
+                /** ================ New Code for you to see ======================*/  
+                // rmdir($productImageDirectoryPath);
+                /** ========================= End here ============================*/  
             }
             $imagePath = 'images/'.randomString(8).'/'.$image['name'];
            
